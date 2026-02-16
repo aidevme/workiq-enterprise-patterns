@@ -1,0 +1,341 @@
+{
+  "$schema": "https://schemas.microsoft.com/dynamics/customization/2.0",
+  "name": "Projects Table Schema",
+  "version": "1.0.0",
+  "description": "Dataverse table schema for project management with Work IQ integration",
+  "table": {
+    "logicalName": "cr_project",
+    "displayName": "Project",
+    "pluralName": "Projects",
+    "description": "Tracks projects with Work IQ context integration",
+    "primaryColumn": {
+      "logicalName": "cr_name",
+      "displayName": "Project Name",
+      "schemaName": "cr_name",
+      "type": "String",
+      "maxLength": 100,
+      "required": true
+    },
+    "columns": [
+      {
+        "logicalName": "cr_description",
+        "displayName": "Description",
+        "schemaName": "cr_description",
+        "type": "Memo",
+        "maxLength": 2000,
+        "required": false,
+        "description": "Detailed project description"
+      },
+      {
+        "logicalName": "cr_status",
+        "displayName": "Status",
+        "schemaName": "cr_status",
+        "type": "Picklist",
+        "required": true,
+        "defaultValue": 1,
+        "options": [
+          {
+            "value": 1,
+            "label": "Active",
+            "color": "#107C10"
+          },
+          {
+            "value": 2,
+            "label": "On Hold",
+            "color": "#FF8C00"
+          },
+          {
+            "value": 3,
+            "label": "Completed",
+            "color": "#0078D4"
+          },
+          {
+            "value": 4,
+            "label": "Cancelled",
+            "color": "#A4262C"
+          }
+        ]
+      },
+      {
+        "logicalName": "cr_priority",
+        "displayName": "Priority",
+        "schemaName": "cr_priority",
+        "type": "Picklist",
+        "required": true,
+        "defaultValue": 2,
+        "options": [
+          {
+            "value": 1,
+            "label": "Low",
+            "color": "#C8C8C8"
+          },
+          {
+            "value": 2,
+            "label": "Medium",
+            "color": "#FFB900"
+          },
+          {
+            "value": 3,
+            "label": "High",
+            "color": "#FF8C00"
+          },
+          {
+            "value": 4,
+            "label": "Critical",
+            "color": "#D13438"
+          }
+        ]
+      },
+      {
+        "logicalName": "cr_startdate",
+        "displayName": "Start Date",
+        "schemaName": "cr_startdate",
+        "type": "DateTime",
+        "format": "DateOnly",
+        "required": false
+      },
+      {
+        "logicalName": "cr_targetdate",
+        "displayName": "Target Date",
+        "schemaName": "cr_targetdate",
+        "type": "DateTime",
+        "format": "DateOnly",
+        "required": false
+      },
+      {
+        "logicalName": "cr_owner",
+        "displayName": "Owner",
+        "schemaName": "cr_owner",
+        "type": "Lookup",
+        "target": "systemuser",
+        "required": true,
+        "description": "Project owner from system users"
+      },
+      {
+        "logicalName": "cr_teammembers",
+        "displayName": "Team Members",
+        "schemaName": "cr_teammembers",
+        "type": "Memo",
+        "maxLength": 1000,
+        "required": false,
+        "description": "Comma-separated list of team member emails"
+      },
+      {
+        "logicalName": "cr_budget",
+        "displayName": "Budget",
+        "schemaName": "cr_budget",
+        "type": "Money",
+        "precision": 2,
+        "required": false,
+        "minValue": 0,
+        "maxValue": 10000000
+      },
+      {
+        "logicalName": "cr_actualcost",
+        "displayName": "Actual Cost",
+        "schemaName": "cr_actualcost",
+        "type": "Money",
+        "precision": 2,
+        "required": false,
+        "minValue": 0
+      },
+      {
+        "logicalName": "cr_completionpercentage",
+        "displayName": "Completion %",
+        "schemaName": "cr_completionpercentage",
+        "type": "Integer",
+        "minValue": 0,
+        "maxValue": 100,
+        "required": false,
+        "defaultValue": 0
+      },
+      {
+        "logicalName": "cr_meetingreferences",
+        "displayName": "Meeting References",
+        "schemaName": "cr_meetingreferences",
+        "type": "Memo",
+        "maxLength": 4000,
+        "required": false,
+        "description": "JSON array of meeting IDs from Work IQ"
+      },
+      {
+        "logicalName": "cr_emailthreads",
+        "displayName": "Email Threads",
+        "schemaName": "cr_emailthreads",
+        "type": "Memo",
+        "maxLength": 4000,
+        "required": false,
+        "description": "JSON array of email thread IDs from Work IQ"
+      },
+      {
+        "logicalName": "cr_documentlinks",
+        "displayName": "Document Links",
+        "schemaName": "cr_documentlinks",
+        "type": "Memo",
+        "maxLength": 4000,
+        "required": false,
+        "description": "JSON array of SharePoint/OneDrive document URLs"
+      },
+      {
+        "logicalName": "cr_decisionlog",
+        "displayName": "Decision Log",
+        "schemaName": "cr_decisionlog",
+        "type": "Memo",
+        "maxLength": 8000,
+        "required": false,
+        "description": "JSON array of decisions with context from Work IQ"
+      },
+      {
+        "logicalName": "cr_riskfactors",
+        "displayName": "Risk Factors",
+        "schemaName": "cr_riskfactors",
+        "type": "Memo",
+        "maxLength": 2000,
+        "required": false,
+        "description": "Identified risk factors"
+      },
+      {
+        "logicalName": "cr_workiqcachekey",
+        "displayName": "Work IQ Cache Key",
+        "schemaName": "cr_workiqcachekey",
+        "type": "String",
+        "maxLength": 100,
+        "required": false,
+        "description": "Cache key for Work IQ queries about this project"
+      },
+      {
+        "logicalName": "cr_lastworkiqupdate",
+        "displayName": "Last Work IQ Update",
+        "schemaName": "cr_lastworkiqupdate",
+        "type": "DateTime",
+        "format": "DateAndTime",
+        "required": false,
+        "description": "Timestamp of last Work IQ context update"
+      }
+    ],
+    "views": [
+      {
+        "name": "Active Projects",
+        "fetchXml": "<fetch><entity name='cr_project'><filter><condition attribute='cr_status' operator='eq' value='1'/></filter><order attribute='cr_priority' descending='true'/></entity></fetch>"
+      },
+      {
+        "name": "High Priority Projects",
+        "fetchXml": "<fetch><entity name='cr_project'><filter><condition attribute='cr_priority' operator='in'><value>3</value><value>4</value></condition><condition attribute='cr_status' operator='eq' value='1'/></filter></entity></fetch>"
+      },
+      {
+        "name": "My Projects",
+        "fetchXml": "<fetch><entity name='cr_project'><filter><condition attribute='cr_owner' operator='eq-userid'/></filter></entity></fetch>"
+      }
+    ],
+    "forms": [
+      {
+        "name": "Main Form",
+        "type": "Main",
+        "sections": [
+          {
+            "name": "General",
+            "columns": [
+              "cr_name",
+              "cr_description",
+              "cr_status",
+              "cr_priority",
+              "cr_owner"
+            ]
+          },
+          {
+            "name": "Timeline",
+            "columns": [
+              "cr_startdate",
+              "cr_targetdate",
+              "cr_completionpercentage"
+            ]
+          },
+          {
+            "name": "Budget",
+            "columns": [
+              "cr_budget",
+              "cr_actualcost"
+            ]
+          },
+          {
+            "name": "Team",
+            "columns": [
+              "cr_teammembers"
+            ]
+          },
+          {
+            "name": "Work IQ Context",
+            "columns": [
+              "cr_meetingreferences",
+              "cr_emailthreads",
+              "cr_documentlinks",
+              "cr_decisionlog"
+            ]
+          }
+        ]
+      }
+    ],
+    "businessRules": [
+      {
+        "name": "Auto-calculate Budget Variance",
+        "scope": "Entity",
+        "condition": "cr_actualcost > cr_budget",
+        "actions": [
+          {
+            "type": "SetValue",
+            "field": "cr_riskfactors",
+            "value": "Budget exceeded"
+          }
+        ]
+      },
+      {
+        "name": "Mark Completed",
+        "scope": "Entity",
+        "condition": "cr_completionpercentage == 100",
+        "actions": [
+          {
+            "type": "SetValue",
+            "field": "cr_status",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "project_tasks",
+        "type": "OneToMany",
+        "relatedEntity": "cr_projecttask",
+        "referencingAttribute": "cr_projectid"
+      }
+    ]
+  },
+  "securityRoles": [
+    {
+      "name": "Project Manager",
+      "privileges": {
+        "cr_project": {
+          "create": "Organization",
+          "read": "Organization",
+          "write": "Organization",
+          "delete": "User",
+          "append": "Organization",
+          "appendTo": "Organization"
+        }
+      }
+    },
+    {
+      "name": "Project Contributor",
+      "privileges": {
+        "cr_project": {
+          "create": "None",
+          "read": "Organization",
+          "write": "User",
+          "delete": "None",
+          "append": "User",
+          "appendTo": "User"
+        }
+      }
+    }
+  ]
+}
